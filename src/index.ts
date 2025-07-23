@@ -45,9 +45,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/inventory', inventoryRoutes);
-app.use('/buy', buyRoutes);
-app.use('/restock', restockRoutes);
+app.use('/api/inventory', inventoryRoutes);
+app.use('/api/buy', buyRoutes);
+app.use('/api/restock', restockRoutes);
 
 // Catch-all 404 handler for unmatched routes/methods (must be after all routes)
 app.use((req, res) => {

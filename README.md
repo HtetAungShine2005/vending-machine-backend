@@ -39,7 +39,7 @@ A robust, scalable RESTful backend for a vending machine, built with **Node.js**
    ```bash
    npm run dev
    ```
-   The server runs at `http://localhost:3000` by default.
+   The server runs at `http://localhost:3000/api` by default.
 
 ---
 
