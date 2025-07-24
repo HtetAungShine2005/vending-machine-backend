@@ -148,7 +148,7 @@ A robust, scalable RESTful backend for a vending machine, built with **Node.js**
   {
     "message": "Enjoy your chocolate!",
     "change": 5,
-    "remainingCash": 205,
+    "remainingCash": 195,
     "chocolateDispensed": "Toblerone"
   }
   ```
@@ -157,6 +157,7 @@ A robust, scalable RESTful backend for a vending machine, built with **Node.js**
   { "error": true, "message": "Chocolate not found", "status": 404 }
   { "error": true, "message": "Out of stock", "status": 400 }
   { "error": true, "message": "Not enough money inserted", "status": 400 }
+  { "error": true, "message": "You have reached your spending limit of $200", "status": 400 }
   ```
 
 ### 7. POST `/restock`
@@ -277,14 +278,18 @@ src/
 - All errors are logged as `[ERROR]` in the console.
 
 ### 7. **User Cash**
+- Each user has a maximum spending limit of $200.
 - Tracked in memory (resets on server restart).
-- Updated every time a chocolate is bought.
+- Decreases every time a chocolate is bought.
 - Included in every `GET /inventory` response.
+- Users cannot buy chocolates if they've reached their spending limit.
 
 ---
 
 ## Assumptions & Notes
 - User cash is tracked in-memory (resets on server restart)
+- Each user has a maximum spending limit of $200
+- User cash decreases with each purchase (not increases)
 - Max chocolate quantity is 10
 - Only 3 chocolates are supported by default: Toblerone, Snickers Pack, Ferrero (but you can add more)
 - All chocolate IDs are auto-incremented and assigned by the backend

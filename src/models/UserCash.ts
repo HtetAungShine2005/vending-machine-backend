@@ -1,6 +1,6 @@
 export class UserCash {
   private static instance: UserCash;
-  private cash: number = 200;
+  private cash: number = 200; // Maximum amount a user can spend
 
   private constructor() {}
 
@@ -15,11 +15,15 @@ export class UserCash {
     return this.cash;
   }
 
-  public addCash(amount: number): void {
-    this.cash += amount;
+  public spendCash(amount: number): void {
+    this.cash -= amount;
   }
 
   public setCash(amount: number): void {
     this.cash = amount;
   }
-} 
+
+  public reset(): void {
+    this.cash = 200;
+  }
+}

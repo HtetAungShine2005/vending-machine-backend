@@ -14,17 +14,26 @@ export const buyChocolateService = async (chocolateName: string, insertedCash: n
   if (insertedCash < chocolate.price) {
     throw { status: 400, message: 'Not enough money inserted' };
   }
+  
+  const userCash = UserCash.getInstance();
+  const remainingCash = userCash.getCash();
+  
+  if (remainingCash < chocolate.price) {
+    throw { status: 400, message: 'You have reached your spending limit of $200' };
+  }
+  
   const change = insertedCash - chocolate.price;
   await prisma.chocolate.update({
     where: { name: chocolateName },
     data: { quantity: chocolate.quantity - 1 },
   });
-  const userCash = UserCash.getInstance();
-  userCash.addCash(chocolate.price);
+  
+  userCash.spendCash(chocolate.price);
+  
   return {
     message: 'Enjoy your chocolate!',
     change,
     remainingCash: userCash.getCash(),
     chocolateDispensed: chocolateName,
   };
-}; 
+};
