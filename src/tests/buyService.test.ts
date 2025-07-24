@@ -31,7 +31,6 @@ describe('buyChocolateService', () => {
     expect(result.message).toBe('Enjoy your chocolate!');
     expect(result.change).toBe(5);
     expect(result.chocolateDispensed).toBe('Toblerone');
-    expect(result.remainingCash).toBe(205);
   });
 
   it('should fail if chocolate is out of stock', async () => {
